@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +31,9 @@ public class BookingSearchResultsPage extends AbstractPage {
 
     @FindBy(xpath = "//a[@data-sortname='class'] ")
     private WebElement descendingStarsSortOption;
+
+    @FindBy(xpath = "//div[contains(@class, 'search_xp_soldouts')]//span[@class='b-button__text']")
+    private WebElement showAvailableOnly;
 
     private WebElement getFilterCriterion(String criterion) {
         return driver.findElement(By.xpath("//div[contains(@class, 'filteroptions')]/a/div/span[contains(text(), '" +criterion+ "')]"));
@@ -54,19 +59,26 @@ public class BookingSearchResultsPage extends AbstractPage {
         waitForJsToLoad();
     }
 
-    public List<String> getHotelStarsInfo() {
+    public List<String> getStarsQtyForHotel() {
         return hotelStarsInfo
                 .stream()
-                .map(WebElement::getText)
+                .map(starsInfo -> starsInfo.getText().split("")[0])
                 .collect(Collectors.toList());
     }
 
+    // Parameters for Stars rating are in format: "Çâåçäû asc" -> choose [1-5], "Çâåçäû desc" -> choose [5-1]
     public void selectSortOption(String sortOption) {
         wait.until(ExpectedConditions.visibilityOf(sortOptionsButton));
         sortOptionsButton.click();
-        if (sortOption.equals("Çâåçäû")) {
-            getSortOptionsField(sortOption).click();
-            ascendingStarsSortOption.click();
+        if (sortOption.contains("Çâåçäû")) {
+            String[] sortOptions = sortOption.split(" ");
+            getSortOptionsField(sortOptions[0]).click();
+            if(sortOptions[1].equals("asc")) {
+                ascendingStarsSortOption.click();
+            }
+            else {
+                descendingStarsSortOption.click();
+            }
         }
         else {
             getSortOptionsField(sortOption).click();
