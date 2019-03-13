@@ -14,11 +14,22 @@ import java.util.List;
 @BaseUrl(value = "https://www.booking.com/")
 public class BookingMainPage extends AbstractPage {
 
+    @FindBy(xpath = "//li[@data-id='language_selector']")
+    private WebElement languageIcon;
+
+    @FindBy(xpath = "(//li[contains(@class,'lang_ru')])[1]")
+    private WebElement russianLanguageIcon;
+
     @FindBy(xpath = "//input[@type='search']")
     private WebElement destinationField;
 
     @FindBy(xpath = "//div[@class='xp__dates-inner']")
     private WebElement selectDatesField;
+
+    @FindBys({
+            @FindBy(xpath = "//td[contains(@class, 'bui-calendar__date--selected')]")
+    })
+    private List<WebElement> selectedDates;
 
     @FindBys({
             @FindBy(xpath = "//div[@class='bui-calendar__month']")
@@ -51,6 +62,12 @@ public class BookingMainPage extends AbstractPage {
         super(driver);
     }
 
+    public void selectRussianlanguage() {
+        languageIcon.click();
+        russianLanguageIcon.click();
+        waitForJsToLoad();
+    }
+
     public void selectDestination(String destination) {
         wait.until(ExpectedConditions.visibilityOf(destinationField));
         destinationField.sendKeys(destination);
@@ -73,12 +90,25 @@ public class BookingMainPage extends AbstractPage {
         }
     }
 
+    private boolean hasSelectedDate(String dateToSelect) {
+        if (selectedDates.size() != 0) {
+            for (WebElement date : selectedDates) {
+                if (date.getText().equals(dateToSelect)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void selectDate(String monthOfYear, String dateToSelect) {
         findMonthOfYearToSelect(monthOfYear);
-        getDatesWithinMonth(monthOfYear)
-                .stream()
-                .filter(date -> date.getText().equals(dateToSelect))
-                .forEach(WebElement::click);
+        if (!hasSelectedDate(dateToSelect)) {
+            getDatesWithinMonth(monthOfYear)
+                    .stream()
+                    .filter(date -> date.getText().equals(dateToSelect))
+                    .forEach(WebElement::click);
+        }
     }
 
     //Date in format "DD, Month Year" is split into: {"DD", " Month Year"}

@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -30,5 +32,11 @@ public class BaseTest {
         int min = rangeValues.get(0);
         int max = rangeValues.get(rangeValues.size() - 1);
         return price >= min && price <= max;
+    }
+
+    protected boolean isSorted(final List<String> listToCheck) {
+        List <String> listToSort = new ArrayList<>(listToCheck);
+        Collections.sort(listToSort);
+        return listToSort.equals(listToCheck);
     }
 }
