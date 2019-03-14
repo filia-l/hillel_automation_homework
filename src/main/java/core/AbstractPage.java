@@ -2,6 +2,7 @@ package core;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -22,7 +23,7 @@ public abstract class AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    public boolean waitForJsToLoad() {
+    protected boolean waitForJsToLoad() {
 
         final String loadJsScript = "return document.readyState";
         final String loadJQueryScript = "return jQuery.active";
@@ -34,5 +35,18 @@ public abstract class AbstractPage {
                 (Long)jsExecutor.executeScript(loadJQueryScript) == 0;
 
         return wait.until(jsLoad) && wait.until(jQueryLoad);
+    }
+
+    protected static void setQuantity(int quantity, Integer currentQuantity, WebElement decreaseQtyButton, WebElement increaseQtyButton) {
+        int count = quantity < currentQuantity ? currentQuantity - quantity : quantity - currentQuantity;
+        while(count > 0) {
+            if (quantity < currentQuantity) {
+                decreaseQtyButton.click();
+            }
+            else {
+                increaseQtyButton.click();
+            }
+            count--;
+        }
     }
 }

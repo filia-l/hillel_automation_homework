@@ -126,17 +126,7 @@ public class BookingMainPage extends AbstractPage {
     public void setAdultsQuantity(int quantity) {
         detailsField.click();
         Integer currentQuantity = Integer.valueOf(adultsQuantityLbl.getText());
-        int count = quantity < currentQuantity ? currentQuantity - quantity : quantity - currentQuantity;
-
-        while(count > 0) {
-            if (quantity < currentQuantity) {
-                subtractAdultsButton.click();
-            }
-            else {
-                addAdultsButton.click();
-            }
-            count--;
-        }
+        setQuantity(quantity, currentQuantity, subtractAdultsButton, addAdultsButton);
     }
 
     public BookingSearchResultsPage submitSearchData() {
