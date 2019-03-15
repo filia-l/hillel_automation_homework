@@ -66,7 +66,7 @@ public class SportcheckSelectedProductPage extends AbstractPage {
         return item.getAttribute("class").contains("selected");
     }
 
-    private String getCurrentQty() {
+    public String getCurrentQty() {
         return currentQty.getAttribute("value");
     }
 
@@ -105,10 +105,12 @@ public class SportcheckSelectedProductPage extends AbstractPage {
 
     public String getItemAddedText() {
         wait.until(ExpectedConditions.visibilityOf(confirmationMessage));
-        return confirmationMessage.getText();
+        return confirmationMessage.getText().toLowerCase();
     }
 
     public void openCartInfo() {
+        //waits for element 'confirmationMessage' to disappear
+        //doesn't work if the element is passed directly, eg: wait.until(ExpectedConditions.invisibilityOf(confirmationMessage)
         wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='header-cart__confirmation-message_text']"))));
         actions.moveToElement(cartIcon).perform();
         wait.until(ExpectedConditions.visibilityOf(cartInfoContainer));

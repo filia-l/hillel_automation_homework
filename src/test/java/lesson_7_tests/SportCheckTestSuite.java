@@ -14,16 +14,17 @@ public class SportCheckTestSuite extends BaseTest {
         SportcheckSelectedProductPage selectedProductPage = new SportcheckSelectedProductPage(webDriver);
         selectedProductPage.selectColourWithOptions("STORM PINK", "BURGANDY CRUSH");
         selectedProductPage.selectSizeWithOptions("S", "M");
-        selectedProductPage.setProductQuantity(3); //for some reason first click is not made by Selenium -> enter needed q-ty + 1
+        selectedProductPage.setProductQuantity(3);
         selectedProductPage.addToCart();
 
-        String expectedMessage = "THESE ITEMS HAVE BEEN ADDED TO YOUR CART.";
-        Assert.assertEquals("Confirmation message is incorrect", expectedMessage, selectedProductPage.getItemAddedText());
+        String expectedMessage = "These items have been added to your cart.";
+        Assert.assertEquals("Confirmation message is incorrect", expectedMessage.toLowerCase(), selectedProductPage.getItemAddedText());
 
         selectedProductPage.openCartInfo();
-        Assert.assertEquals("Product title in cart doesn't match title on product page"
-                ,selectedProductPage.getProductTitle(), selectedProductPage.getCartItemTitle());
-        Assert.assertEquals("Product q-yu in cart doesn't match set quantity","2", selectedProductPage.getCartItemQty());
+        Assert.assertEquals("Product title in cart doesn't match title on product page",
+                selectedProductPage.getProductTitle(), selectedProductPage.getCartItemTitle());
+        Assert.assertEquals("Product q-yu in cart doesn't match set quantity",
+                selectedProductPage.getCurrentQty(), selectedProductPage.getCartItemQty());
     }
 
 }
