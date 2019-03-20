@@ -25,7 +25,7 @@ public class UrlBuilder {
     public static String getPropertyValue(final String key) {
         final Properties testProperties = new Properties();
         try {
-            testProperties.load(new FileInputStream("src/main/resources/properties/test.properties"));
+            testProperties.load(new FileInputStream("src/main/resources/test.properties"));
         } catch (final IOException e) {
             throw new IllegalStateException("Unable to read property file!", e);
         }

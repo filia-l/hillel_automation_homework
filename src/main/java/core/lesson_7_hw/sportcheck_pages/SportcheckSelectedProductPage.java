@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SportcheckSelectedProductPage extends AbstractPage {
 
@@ -65,6 +66,15 @@ public class SportcheckSelectedProductPage extends AbstractPage {
     private boolean isItemSelected(WebElement item) {
         return item.getAttribute("class").contains("selected");
     }
+
+    // added from classwork -> database check
+    @FindBy(xpath = "//a[@data-control-type='color' and not(contains(@class, 'selected'))]")
+    private WebElement color;
+
+    @FindBys({
+            @FindBy(xpath = "//span[@class='option-tiles__item-title']")
+    })
+    private List<WebElement> sizes;
 
     public String getCurrentQty() {
         return currentQty.getAttribute("value");
@@ -127,4 +137,22 @@ public class SportcheckSelectedProductPage extends AbstractPage {
     public String getCartItemQty() {
         return cartItemQty.getText();
     }
+
+    // added from classwork -> database check
+    public void selectRequiredSize(final String size) {
+        Optional<WebElement> requiredSize = sizes.stream()
+                .filter(item -> item.getText().equals(size))
+                .findFirst();
+        if(requiredSize.isPresent()) {
+            final WebElement element = requiredSize.get();
+            element.click();
+        }
+    }
+
+    public SportcheckShopppingCartPage proceedToShoppingCartPage() {
+        waitForJsToLoad();
+        cartIcon.click();
+        return new SportcheckShopppingCartPage(driver);
+    }
+
 }
