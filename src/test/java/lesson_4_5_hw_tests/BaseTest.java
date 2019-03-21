@@ -3,12 +3,17 @@ package lesson_4_5_hw_tests;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class BaseTest {
 
@@ -34,9 +39,34 @@ public class BaseTest {
         return price >= min && price <= max;
     }
 
-    protected boolean isSorted(final List<String> listToCheck) {
+    protected boolean isStringListSorted(final List<String> listToCheck) {
         List <String> listToSort = new ArrayList<>(listToCheck);
         Collections.sort(listToSort);
         return listToSort.equals(listToCheck);
+    }
+
+    protected boolean isDatesListSorted(final List<LocalDateTime> listToCheck) {
+        List <LocalDateTime> listToSort = new ArrayList<>(listToCheck);
+        Collections.sort(listToSort);
+        return listToSort.equals(listToCheck);
+    }
+
+    private LocalDateTime convertStringToDate(String dateToConvert) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        return LocalDateTime.parse(dateToConvert, formatter);
+    }
+
+    protected List<String> getStringValues(List<WebElement> webElementValues) {
+        return webElementValues
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+    protected List<LocalDateTime> getDateTimeValues(List<String> dates) {
+        return dates
+                .stream()
+                .map(this::convertStringToDate)
+                .collect(Collectors.toList());
     }
 }

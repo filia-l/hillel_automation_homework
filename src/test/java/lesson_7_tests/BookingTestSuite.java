@@ -70,7 +70,7 @@ public class BookingTestSuite extends BaseTest {
         searchResultsPage.selectFilterCriterion("Показать только доступные варианты");
         final String sortOption = "Звезды asc";
         searchResultsPage.selectSortOption(sortOption);
-        Assert.assertTrue("Hotels shown on page are not sorted", isSorted(searchResultsPage.getStarsQtyForHotel()));
+        Assert.assertTrue("Hotels shown on page are not sorted", isStringListSorted(searchResultsPage.getStarsQtyForHotel()));
     }
 
 }
