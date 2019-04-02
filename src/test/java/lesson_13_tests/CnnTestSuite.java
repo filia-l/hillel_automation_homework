@@ -1,6 +1,6 @@
 package lesson_13_tests;
 
-import core.be.dto.CnnApi;
+import core.be.CnnApi;
 import core.be.dto.Result;
 import core.fe.lesson_13_hw.CnnPage;
 import io.restassured.RestAssured;

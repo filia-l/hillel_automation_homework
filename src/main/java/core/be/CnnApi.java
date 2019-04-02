@@ -1,6 +1,7 @@
-package core.be.dto;
+package core.be;
 
 import core.be.AbstractApi;
+import core.be.dto.CnnSearchResultsModel;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
