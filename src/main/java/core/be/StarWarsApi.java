@@ -7,8 +7,6 @@ import io.restassured.http.ContentType;
 
 public class StarWarsApi extends AbstractApi {
 
-    private static final String STAR_WARS_CHARACTER = "https://swapi.co/api/people/1/";
-
     public StarWarsMovieModel getMovieTitle(String movieUrl) {
         return RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -16,10 +14,10 @@ public class StarWarsApi extends AbstractApi {
                 .as(StarWarsMovieModel.class);
     }
 
-    public StarWarsCharacterModel getCharacterData() {
+    public StarWarsCharacterModel getCharacterData(String characterUri) {
         return RestAssured.given()
                 .contentType(ContentType.JSON)
-                .get(STAR_WARS_CHARACTER)
+                .get(characterUri)
                 .as(StarWarsCharacterModel.class);
     }
 
