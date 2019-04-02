@@ -1,4 +1,4 @@
-package core.dto;
+package core.fe.dto;
 
 import lombok.Data;
 

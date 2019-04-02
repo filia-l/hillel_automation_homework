@@ -1,7 +1,7 @@
-package core.lesson_7_hw.booking_pages;
+package core.fe.lesson_7_hw.booking_pages;
 
-import core.AbstractPage;
-import core.BaseUrl;
+import core.fe.AbstractPage;
+import core.fe.BaseUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

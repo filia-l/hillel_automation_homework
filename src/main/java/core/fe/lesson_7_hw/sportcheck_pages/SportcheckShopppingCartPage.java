@@ -1,7 +1,7 @@
-package core.lesson_7_hw.sportcheck_pages;
+package core.fe.lesson_7_hw.sportcheck_pages;
 
-import core.AbstractPage;
-import core.dto.ProductDetailsDTO;
+import core.fe.AbstractPage;
+import core.fe.dto.ProductDetailsDTO;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

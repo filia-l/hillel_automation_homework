@@ -1,7 +1,7 @@
 package lesson_7_tests;
 
-import core.lesson_7_hw.booking_pages.BookingMainPage;
-import core.lesson_7_hw.booking_pages.BookingSearchResultsPage;
+import core.fe.lesson_7_hw.booking_pages.BookingMainPage;
+import core.fe.lesson_7_hw.booking_pages.BookingSearchResultsPage;
 import core.utils.UrlBuilder;
 import lesson_4_5_hw_tests.BaseTest;
 import org.junit.Assert;
