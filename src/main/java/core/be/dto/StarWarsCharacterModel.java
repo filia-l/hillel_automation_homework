@@ -1,9 +1,11 @@
 package core.be.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import core.be.StarWarsApi;
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StarWarsCharacterModel {
 
     private String name;
@@ -16,12 +18,6 @@ public class StarWarsCharacterModel {
     private String gender;
     private String homeworld;
     private String[] films;
-    private String[] species;
-    private String[] vehicles;
-    private String[] starships;
-    private String created;
-    private String edited;
-    private String url;
 
     public void setFilms(String[] initialFilmsLinks) {
         String[] convertedFilms = new String[initialFilmsLinks.length];
