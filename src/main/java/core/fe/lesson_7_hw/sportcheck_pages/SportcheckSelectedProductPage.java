@@ -1,6 +1,6 @@
-package core.lesson_7_hw.sportcheck_pages;
+package core.fe.lesson_7_hw.sportcheck_pages;
 
-import core.AbstractPage;
+import core.fe.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

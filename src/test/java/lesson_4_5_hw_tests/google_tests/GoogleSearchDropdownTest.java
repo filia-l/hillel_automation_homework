@@ -1,6 +1,6 @@
 package lesson_4_5_hw_tests.google_tests;
 
-import core.lesson_4_5_hw.google_pages.GoogleMainPage;
+import core.fe.lesson_4_5_hw.google_pages.GoogleMainPage;
 import lesson_4_5_hw_tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;

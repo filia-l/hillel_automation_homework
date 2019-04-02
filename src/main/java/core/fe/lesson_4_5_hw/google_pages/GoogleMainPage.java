@@ -1,6 +1,6 @@
-package core.lesson_4_5_hw.google_pages;
+package core.fe.lesson_4_5_hw.google_pages;
 
-import core.BaseUrl;
+import core.fe.BaseUrl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

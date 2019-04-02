@@ -1,6 +1,6 @@
 package lesson_9_tets;
 
-import core.lesson_9_hw.JqueryBootgridPage;
+import core.fe.lesson_9_hw.JqueryBootgridPage;
 import lesson_4_5_hw_tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;

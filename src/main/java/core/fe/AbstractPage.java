@@ -1,4 +1,4 @@
-package core;
+package core.fe;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

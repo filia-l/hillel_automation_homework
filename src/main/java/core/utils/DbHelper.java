@@ -1,6 +1,6 @@
 package core.utils;
 
-import core.dto.ProductDetailsDTO;
+import core.fe.dto.ProductDetailsDTO;
 
 import java.sql.*;
 

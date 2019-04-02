@@ -1,15 +1,14 @@
 package lesson_4_5_hw_tests.hotline_tests;
 
-import core.lesson_4_5_hw.hotline_pages.HotlineComparisonPage;
-import core.lesson_4_5_hw.hotline_pages.HotlineMainPage;
-import core.lesson_4_5_hw.hotline_pages.HotlineSmartphoneDetailedInfoPage;
-import core.lesson_4_5_hw.hotline_pages.HotlineSmartphonesPage;
+import core.fe.lesson_4_5_hw.hotline_pages.HotlineComparisonPage;
+import core.fe.lesson_4_5_hw.hotline_pages.HotlineMainPage;
+import core.fe.lesson_4_5_hw.hotline_pages.HotlineSmartphoneDetailedInfoPage;
+import core.fe.lesson_4_5_hw.hotline_pages.HotlineSmartphonesPage;
 import lesson_4_5_hw_tests.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Set;
 
 public class HotlineTestSuite extends BaseTest{
 

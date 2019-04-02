@@ -1,6 +1,6 @@
-package core.lesson_9_hw;
+package core.fe.lesson_9_hw;
 
-import core.AbstractPage;
+import core.fe.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

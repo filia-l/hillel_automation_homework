@@ -1,8 +1,8 @@
 package lesson_7_tests;
 
-import core.dto.ProductDetailsDTO;
-import core.lesson_7_hw.sportcheck_pages.SportcheckSelectedProductPage;
-import core.lesson_7_hw.sportcheck_pages.SportcheckShopppingCartPage;
+import core.fe.dto.ProductDetailsDTO;
+import core.fe.lesson_7_hw.sportcheck_pages.SportcheckSelectedProductPage;
+import core.fe.lesson_7_hw.sportcheck_pages.SportcheckShopppingCartPage;
 import core.utils.DbHelper;
 import lesson_4_5_hw_tests.BaseTest;
 import org.junit.Assert;

@@ -1,6 +1,6 @@
 package core.utils;
 
-import core.BaseUrl;
+import core.fe.BaseUrl;
 
 import java.io.FileInputStream;
 import java.io.IOException;
