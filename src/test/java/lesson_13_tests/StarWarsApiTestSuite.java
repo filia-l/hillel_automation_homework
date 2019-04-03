@@ -32,10 +32,11 @@ public class StarWarsApiTestSuite {
         expectedCharacterData.setHair_color("blond");
         expectedCharacterData.setMass("77");
         expectedCharacterData.setSkin_color("fair");
-        expectedCharacterData.setFilmsManually(films);
+        expectedCharacterData.setFilms(films);
 
         final StarWarsApi starWarsApi = new StarWarsApi();
         final StarWarsCharacterModel actualCharacterData = starWarsApi.getCharacterData(personUri);
+        actualCharacterData.setFilms(starWarsApi.convertFilms(actualCharacterData.getFilms()));
 
         ReflectionAssert.assertReflectionEquals("Character data is not equal!", expectedCharacterData, actualCharacterData);
     }

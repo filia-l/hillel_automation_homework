@@ -21,4 +21,11 @@ public class StarWarsApi extends AbstractApi {
                 .as(StarWarsCharacterModel.class);
     }
 
+    public String[] convertFilms(String[] initialFilmsLinks) {
+        String[] convertedFilms = new String[initialFilmsLinks.length];
+        for (int i = 0; i < convertedFilms.length; i++) {
+            convertedFilms[i] = getMovieTitle(initialFilmsLinks[i]).getTitle();
+        }
+        return convertedFilms;
+    }
 }

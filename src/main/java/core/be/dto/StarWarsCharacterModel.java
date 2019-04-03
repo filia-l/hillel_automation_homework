@@ -19,16 +19,4 @@ public class StarWarsCharacterModel {
     private String homeworld;
     private String[] films;
 
-    public void setFilms(String[] initialFilmsLinks) {
-        String[] convertedFilms = new String[initialFilmsLinks.length];
-        StarWarsApi starWarsApi = new StarWarsApi();
-        for (int i = 0; i < convertedFilms.length; i++) {
-            convertedFilms[i] = starWarsApi.getMovieTitle(initialFilmsLinks[i]).getTitle();
-        }
-        this.films = convertedFilms;
-    }
-
-    public void setFilmsManually(String[] films) {
-        this.films = films;
-    }
 }
