@@ -1,42 +1,34 @@
 package lesson_13_tests;
 
+import com.google.gson.Gson;
 import core.be.StarWarsApi;
 import core.be.dto.StarWarsCharacterModel;
+import core.utils.UrlBuilder;
 import io.restassured.RestAssured;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
 
 public class StarWarsApiTestSuite {
 
     @Test
-    public void checkStarWarsCharacterData() {
+    public void checkStarWarsCharacterData() throws IOException {
 
-        RestAssured.baseURI = "https://swapi.co/api/";
         final String personUri = "people/1/";
 
-        final StarWarsCharacterModel expectedCharacterData = new StarWarsCharacterModel();
-        final String[] films = {
-             "The Empire Strikes Back",
-             "Revenge of the Sith",
-             "Return of the Jedi",
-             "A New Hope",
-             "The Force Awakens"
-        };
-
-        expectedCharacterData.setName("Luke Skywalker");
-        expectedCharacterData.setHeight("172");
-        expectedCharacterData.setBirth_year("19BBY");
-        expectedCharacterData.setEye_color("blue");
-        expectedCharacterData.setGender("male");
-        expectedCharacterData.setHomeworld("https://swapi.co/api/planets/1/");
-        expectedCharacterData.setHair_color("blond");
-        expectedCharacterData.setMass("77");
-        expectedCharacterData.setSkin_color("fair");
-        expectedCharacterData.setFilms(films);
+        final Gson gson = new Gson();
+        final String jsonPath = UrlBuilder.getPropertyValue("star.wars.character");
+        final String characterData = FileUtils.readFileToString(
+                new File(jsonPath), Charset.defaultCharset()
+        );
+        final StarWarsCharacterModel expectedCharacterData = gson.fromJson(characterData, StarWarsCharacterModel.class);
 
         final StarWarsApi starWarsApi = new StarWarsApi();
         final StarWarsCharacterModel actualCharacterData = starWarsApi.getCharacterData(personUri);
-        actualCharacterData.setFilms(starWarsApi.convertFilms(actualCharacterData.getFilms()));
 
         ReflectionAssert.assertReflectionEquals("Character data is not equal!", expectedCharacterData, actualCharacterData);
     }

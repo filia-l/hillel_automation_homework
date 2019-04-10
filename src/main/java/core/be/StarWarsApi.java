@@ -5,27 +5,31 @@ import core.be.dto.StarWarsMovieModel;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
+import java.util.Arrays;
+
 public class StarWarsApi extends AbstractApi {
 
-    public StarWarsMovieModel getMovieTitle(String movieUrl) {
-        return RestAssured.given()
-                .contentType(ContentType.JSON)
-                .get(movieUrl)
-                .as(StarWarsMovieModel.class);
+    @Override
+    protected String setUpBaseUrl() {
+        return "https://swapi.co/api/";
     }
 
     public StarWarsCharacterModel getCharacterData(String characterUri) {
+        final StarWarsCharacterModel starWarsCharacter = retrieveCharacterData(characterUri);
+        final String[] movies = Arrays.stream(starWarsCharacter.getFilms())
+                .map(movieLink -> RestAssured.given()
+                        .contentType(ContentType.JSON)
+                        .get(movieLink)
+                        .as(StarWarsMovieModel.class))
+        .map(StarWarsMovieModel::getTitle).toArray(String[]::new);
+        starWarsCharacter.setFilms(movies);
+        return starWarsCharacter;
+    }
+
+    public StarWarsCharacterModel retrieveCharacterData(String characterUri) {
         return RestAssured.given()
                 .contentType(ContentType.JSON)
                 .get(characterUri)
                 .as(StarWarsCharacterModel.class);
-    }
-
-    public String[] convertFilms(String[] initialFilmsLinks) {
-        String[] convertedFilms = new String[initialFilmsLinks.length];
-        for (int i = 0; i < convertedFilms.length; i++) {
-            convertedFilms[i] = getMovieTitle(initialFilmsLinks[i]).getTitle();
-        }
-        return convertedFilms;
     }
 }
