@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import core.be.StarWarsApi;
 import core.be.dto.StarWarsCharacterModel;
 import core.utils.UrlBuilder;
-import io.restassured.RestAssured;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import java.io.File;

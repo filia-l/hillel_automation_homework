@@ -1,0 +1,17 @@
+{
+  "id": 0,
+  "category": {
+    "id": 12,
+    "name": "MyTestCategory"
+  },
+  "name": "Hillel_Pet",
+  "photoUrls": [
+    "file"
+  ],
+  "tags": [
+    {
+      "id": 13,
+      "name": "MyTestTag"
+    }
+  ]
+}
