@@ -1,8 +1,8 @@
 package core.fe.lesson_13_hw;
 
-import core.be.dto.CnnSearchResultsModel;
 import core.be.dto.Result;
 import core.fe.AbstractPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CnnPage extends AbstractPage {
 
@@ -19,15 +20,10 @@ public class CnnPage extends AbstractPage {
     @FindBy(xpath = "//input[@class='search__input-field']")
     private WebElement searchField;
 
-    @FindBys( {
-            @FindBy(xpath = "//div[@class='cnn-search__result-contents']/h3[@class = 'cnn-search__result-headline']")
+    @FindBys({
+            @FindBy(xpath = "//div[@class='cnn-search__result-contents']")
     })
-    private List<WebElement> titles;
-
-    @FindBys( {
-            @FindBy(xpath = "//div[@class='cnn-search__result-contents']/div[@class = 'cnn-search__result-body']")
-    })
-    private List<WebElement> texts;
+    private List<WebElement> searchResults;
 
     public CnnPage(WebDriver driver) {
         super(driver);
@@ -39,13 +35,14 @@ public class CnnPage extends AbstractPage {
         waitForJsToLoad();
     }
 
-    public CnnSearchResultsModel getSearchResults() {
-        CnnSearchResultsModel resultsModel = new CnnSearchResultsModel();
-        Result[] results = new Result[titles.size()];
-        for (int i = 0; i < results.length; i++) {
-            results[i] = new Result(titles.get(i).getText(), texts.get(i).getText());
-        }
-        resultsModel.setResult(results);
-        return resultsModel;
+    public List<Result> getSearchResults() {
+        final String articleTitleLocator = "./h3[@class='cnn-search__result-headline']";
+        final String articleTextLocator = "./div[@class='cnn-search__result-body']";
+        return searchResults.stream()
+                .map(article -> {
+                    final String title = article.findElement(By.xpath(articleTitleLocator)).getText();
+                    final String text = article.findElement(By.xpath(articleTextLocator)).getText();
+                    return new Result(title, text);
+                }).collect(Collectors.toList());
     }
 }
