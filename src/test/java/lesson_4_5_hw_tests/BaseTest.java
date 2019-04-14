@@ -1,5 +1,7 @@
 package lesson_4_5_hw_tests;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -68,5 +70,13 @@ public class BaseTest {
                 .stream()
                 .map(this::convertStringToDate)
                 .collect(Collectors.toList());
+    }
+
+    protected String generateRandomString() {
+        return RandomStringUtils.randomAlphabetic(8);
+    }
+
+    protected String convertStringToHash(String toConvert) {
+        return DigestUtils.md5Hex(toConvert);
     }
 }

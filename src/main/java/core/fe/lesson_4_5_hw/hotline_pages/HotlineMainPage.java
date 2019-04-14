@@ -8,6 +8,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HotlineMainPage extends AbstractPage {
 
+    @FindBy(xpath = "//span[@class='box-in']")
+    private WebElement logInIcon;
+
+    @FindBy(xpath = "//span[@class='name ellipsis']")
+    private WebElement loggedInUser;
+
     @FindBy(xpath = "//li[@class='level-1 mobile']")
     private WebElement mainMenuSmartphoneItem;
 
@@ -28,5 +34,14 @@ public class HotlineMainPage extends AbstractPage {
         subMenuSmartphoneItem.click();
 
         return new HotlineSmartphonesPage(driver);
+    }
+
+    public void clickLogInButton() {
+        logInIcon.click();
+        waitForJsToLoad();
+    }
+
+    public String getLoggedInUserName() {
+        return loggedInUser.getText();
     }
 }
