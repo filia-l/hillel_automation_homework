@@ -19,6 +19,9 @@ public class HotlineRegistrationPage extends AbstractPage {
     @FindBy(xpath = "//input[@id='submit-button']")
     private WebElement registerButton;
 
+    @FindBy(xpath = "//div[@class='item-success']")
+    private WebElement confirmationMessage;
+
     public HotlineRegistrationPage(final WebDriver driver) {
         super(driver);
     }
@@ -29,5 +32,9 @@ public class HotlineRegistrationPage extends AbstractPage {
         passwordField.sendKeys(password);
         registerButton.click();
         waitForJsToLoad();
+    }
+
+    public String getConfirmationMessage() {
+        return confirmationMessage.getText();
     }
 }
