@@ -27,10 +27,11 @@ public class TempMailCreateEmailPage extends AbstractPage {
         return domainField.getText();
     }
 
-    public void createNewEmail(String login) {
+    public String createNewEmail(String login) {
         loginField.sendKeys(login);
         submitButton.click();
         waitForJsToLoad();
+        return login + getDefaultDomainName();
     }
 
     public String getCreatedEmail() {

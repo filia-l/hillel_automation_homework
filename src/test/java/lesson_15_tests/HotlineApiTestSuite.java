@@ -21,11 +21,9 @@ public class HotlineApiTestSuite extends BaseTest {
 
         final String login = generateRandomString().toLowerCase();
         final String password = generateRandomString();
-        final String domain = createEmailPage.getDefaultDomainName();
-        final String expectedEmailName = login+domain;
+        final String expectedEmailName = createEmailPage.createNewEmail(login);
         final String emailHash = convertStringToHash(expectedEmailName);
 
-        createEmailPage.createNewEmail(login);
         final String actualEmailName = createEmailPage.getCreatedEmail();
 
         Assert.assertEquals("Email was created incorrectly", expectedEmailName, actualEmailName);
