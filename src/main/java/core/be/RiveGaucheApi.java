@@ -24,8 +24,9 @@ public class RiveGaucheApi extends AbstractApi {
                 .post(ADD_TO_CART);
     }
 
-    public String getShoppingCartInfo() {
+    public String getShoppingCartInfo(List cookies) {
         return RestAssured.given()
+                .cookies(new Cookies(cookies))
                 .contentType(ContentType.HTML)
                 .get(GET_CART)
                 .asString();

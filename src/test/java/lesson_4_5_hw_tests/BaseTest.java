@@ -4,16 +4,14 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -78,6 +76,16 @@ public class BaseTest {
 
     protected String convertStringToHash(String toConvert) {
         return DigestUtils.md5Hex(toConvert);
+    }
+
+    protected List getSessionCookies() {
+        Set<Cookie> seleniumCookies = webDriver.manage().getCookies();
+        ArrayList restAssuredCookies = new ArrayList();
+
+        for (Cookie cookie : seleniumCookies) {
+            restAssuredCookies.add(new io.restassured.http.Cookie.Builder(cookie.getName(), cookie.getValue()).build());
+        }
+        return restAssuredCookies;
     }
 
 }
