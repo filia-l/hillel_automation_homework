@@ -79,4 +79,5 @@ public class BaseTest {
     protected String convertStringToHash(String toConvert) {
         return DigestUtils.md5Hex(toConvert);
     }
+
 }
