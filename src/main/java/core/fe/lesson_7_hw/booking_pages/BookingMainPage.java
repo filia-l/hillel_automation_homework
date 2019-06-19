@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
+import java.util.*;
 
 @BaseUrl(value = "https://www.booking.com/")
 public class BookingMainPage extends AbstractPage {
