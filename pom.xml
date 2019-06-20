@@ -23,13 +23,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20.1</version>
                 <configuration>
-                    <includes>
-                        <include>**/lesson_4_5_hw_tests/**</include>
-                        <include>**/lesson_7_tests/**</include>
-                        <include>**/lesson_9_tests/**</include>
-                        <include>**/lesson_13_tests/**</include>
-                        <include>**/lesson_14_tests/**</include>
-                        <include>**/lesson_15_tests/**</include>
+                    <includes>                     
+                        <include>**/lesson_14_tests/**</include>               
                     </includes>
                 </configuration>
             </plugin>
