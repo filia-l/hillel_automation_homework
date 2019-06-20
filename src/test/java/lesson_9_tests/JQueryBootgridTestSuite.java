@@ -1,4 +1,4 @@
-package lesson_9_tets;
+package lesson_9_tests;
 
 import core.fe.lesson_9_hw.JqueryBootgridPage;
 import lesson_4_5_hw_tests.BaseTest;
